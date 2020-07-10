@@ -1,14 +1,23 @@
 var express = require('express')
 var router = express.Router()
+var postgres = require('postgres')
+var sql = postgres('postgres://postgres:postgres@localhost:5432/bookmarks')
 
-const bookmarks = [
-  { title: "google", url: "https://google.com", description: "cool new search engine" },
-  { title: "facebook", url: "https://facebook.com", description: "cool new social media site" }
-]
+// const bookmarks = [
+//   { title: "google", url: "https://google.com", description: "cool new search engine" },
+//   { title: "facebook", url: "https://facebook.com", description: "cool new social media site" }
+// ]
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
+router.get('/', async function (req, res) {
+  const bookmarks = await sql`SELECT * FROM bookmarks`
   res.send(bookmarks)
+})
+
+router.post('/', async function (req, res) {
+  const { title, url, description } = req.body
+  await sql`insert into bookmarks values (${title}, ${url}, ${description})`
+  res.sendStatus(201)
 })
 
 module.exports = router
