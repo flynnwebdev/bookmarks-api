@@ -1,7 +1,7 @@
 var express = require('express')
 var router = express.Router()
 var postgres = require('postgres')
-var sql = postgres('postgres://postgres:postgres@localhost:5432/bookmarks')
+var sql = postgres('postgres://xjyucolxtpzijc:ee1bd4378d7256467a79ba96e1c706bbde7520e8761383c8ac815d1be36e3a70@ec2-35-172-73-125.compute-1.amazonaws.com:5432/d3jn0nrjbugv4s')
 
 // const bookmarks = [
 //   { title: "google", url: "https://google.com", description: "cool new search engine" },
